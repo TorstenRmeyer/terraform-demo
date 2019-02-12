@@ -21,6 +21,8 @@ node {
 			withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'demo-tenant', usernameVariable : 'USERNAME', passwordVariable : 'PASSWORD']]) {
 				env.AWS_SECRET_KEY_ID = "$USERNAME"
 				env.AWS_SECRET_ACCESS_KEY = "$PASSWORD"
+				
+				echo "username $USERNAME"
 			}
 	}
 	stage("plan") {
