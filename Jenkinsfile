@@ -4,7 +4,7 @@ node {
 		//Remove later.... sho that Jenkinsfile works
 		echo "start build"
 		env.PATH = "/usr/local/bin/:${env.PATH}"
-		env.TF_LOG = "DEBUG"
+		env.TF_LOG = "TRACE"
 		env.AWS_DEFAULT_REGION = "eu-central-1"
 		
 		//set AWS Credentials - credentials need to be in Jenkins credentials using a naming schema
