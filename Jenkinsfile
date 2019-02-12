@@ -33,7 +33,7 @@ node {
 				-backend-config "key=${env.JOB_NAME}" \
 				-backend-config "region=eu-central-1" \
 				-backend-config "access_key=$REMOTESTATE_USERNAME" \
-				-backend-config="secret_key=$REMOTESTATE_PASSWORD" \
+				-backend-config "secret_key=$REMOTESTATE_PASSWORD" \
 				"""
 			}		
 	}
