@@ -5,7 +5,7 @@ node {
 		echo "start build"
 		env.PATH = "/usr/local/bin/:${env.PATH}"
 		//Terraform version print
-		sh "terraform --version"
+		sh "terraform --version --no-color"
 	}
 	stage("prepare") {
 		
@@ -15,7 +15,7 @@ node {
 			//setup local environment with terraform init and set remote config
 			// terraform init is safe to run multiple times
 			// Open: Use a different key-pair to get state
-			sh "terraform init -backend=true -backend-config \"bucket=terraform-state-demotenant\" -backend-config \"key=${env.JOB_NAME}\" -backend-config \"region=eu-central-1\""
+			sh "terraform init --no-color -backend=true -backend-config \"bucket=terraform-state-demotenant\" -backend-config \"key=${env.JOB_NAME}\" -backend-config \"region=eu-central-1\""
 			
 			//set AWS Credentials - credentials need to be in Jenkins credentials using a naming schema
 			withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'demo-tenant', usernameVariable : 'USERNAME', passwordVariable : 'PASSWORD']]) {
@@ -26,11 +26,11 @@ node {
 	stage("plan") {
 		//Run terraform plan to see what will change
 		// OPTIONAL set vars using --var-file=[JOB_NAME].tfvars
-		sh "terraform plan -out-file=plan.out"
+		sh "terraform plan --no-color -out-file=plan.out"
 	}
 	stage("apply") {
 		//Run terraform plan to see what will change
-		sh "terraform apply plan.out"
+		sh "terraform apply plan.out --no-color"
 		
 		//Write result somewhere
 	}
