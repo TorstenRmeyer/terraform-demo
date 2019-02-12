@@ -49,6 +49,6 @@ data "aws_ami" "amazon_linux" {
 # Example: Create a simple SNS - use Variable for name
 ##################################################################
 resource "aws_sns" "example_sns" {
-	name= "${vars.snstopic}"
+	name= "${var.snstopic}"
 }
 
