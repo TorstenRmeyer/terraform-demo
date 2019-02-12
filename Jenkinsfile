@@ -16,8 +16,7 @@ node {
 			withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'demo-tenant', usernameVariable : 'USERNAME', passwordVariable : 'PASSWORD']]) {
 				env.AWS_SECRET_KEY_ID = "$USERNAME"
 				env.AWS_SECRET_ACCESS_KEY = "$PASSWORD"
-				
-				echo "setup API username $USERNAME"
+				sh 'echo uname=$USERNAME pwd=$PASSWORD'
 			}
 		
 			//setup local environment with terraform init and set remote config
