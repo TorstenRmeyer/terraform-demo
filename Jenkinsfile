@@ -11,9 +11,7 @@ node {
 		withCredentials([usernamePassword(credentialsId: 'demo-tenant', usernameVariable : 'USERNAME', passwordVariable : 'PASSWORD')]) {
 			env.AWS_SECRET_KEY_ID = "$USERNAME"
 			env.AWS_SECRET_ACCESS_KEY = "$PASSWORD"
-			sh 'echo uname=$USERNAME pwd=$PASSWORD'
 		}
-		
 		
 		//Terraform version print
 		sh "terraform --version -no-color"
@@ -25,8 +23,6 @@ node {
 		
 			//setup local environment with terraform init and set remote config
 			// terraform init is safe to run multiple times
-			// Open: Use a different key-pair to get state
-			sh 'echo $AWS_SECRET_KEY_ID'
 			
 			//Attention: These Credentials are different from the ones used to deploy
 			// this set is used for the state only!
@@ -43,7 +39,7 @@ node {
 	stage("plan") {
 		//Run terraform plan to see what will change
 		// OPTIONAL set vars using --var-file=[JOB_NAME].tfvars
-		sh "terraform plan -no-color -out-file=plan.out"
+		sh "terraform plan -no-color -out=plan.out"
 	}
 	stage("apply") {
 		//Run terraform plan to see what will change
