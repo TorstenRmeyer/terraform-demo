@@ -15,7 +15,7 @@ node {
 			//setup local environment with terraform init and set remote config
 			// terraform init is safe to run multiple times
 			// Open: Use a different key-pair to get state
-			sh "terraform init -backend=ture -backend-config \"bucket=terraform-state-demotenant\" -backend-config \"key=${env.JOB_NAME}\" -backend-config \"region=eu-central-1\""
+			sh "terraform init -backend=true -backend-config \"bucket=terraform-state-demotenant\" -backend-config \"key=${env.JOB_NAME}\" -backend-config \"region=eu-central-1\""
 			
 			//set AWS Credentials - credentials need to be in Jenkins credentials using a naming schema
 			withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'demo-tenant', usernameVariable : 'USERNAME', passwordVariable : 'PASSWORD']]) {
