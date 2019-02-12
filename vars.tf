@@ -1,0 +1,3 @@
+variable "snstopic" {
+  name = "myterraformtopic"
+}
