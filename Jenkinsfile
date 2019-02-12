@@ -8,8 +8,9 @@ node {
 		env.AWS_DEFAULT_REGION = "eu-central-1"
 		
 		//set AWS Credentials - credentials need to be in Jenkins credentials using a naming schema
-		withCredentials([usernamePassword(credentialsId: 'demo-tenant', usernameVariable : 'USERNAME', passwordVariable : 'PASSWORD')]) {
-			env.AWS_SECRET_KEY_ID = "$USERNAME"
+		withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: "demo-tenant",
+				      usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+			env.AWS_ACCESS_KEY_ID = "$USERNAME"
 			env.AWS_SECRET_ACCESS_KEY = "$PASSWORD"
 		}
 		
