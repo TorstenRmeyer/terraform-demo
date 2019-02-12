@@ -4,6 +4,16 @@ node {
 		//Remove later.... sho that Jenkinsfile works
 		echo "start build"
 		env.PATH = "/usr/local/bin/:${env.PATH}"
+		env.AWS_DEFAULT_REGION = "eu-central-1"
+		
+		//set AWS Credentials - credentials need to be in Jenkins credentials using a naming schema
+		withCredentials([usernamePassword(credentialsId: 'demo-tenant', usernameVariable : 'USERNAME', passwordVariable : 'PASSWORD')]) {
+			env.AWS_SECRET_KEY_ID = "$USERNAME"
+			env.AWS_SECRET_ACCESS_KEY = "$PASSWORD"
+			sh 'echo uname=$USERNAME pwd=$PASSWORD'
+		}
+		
+		
 		//Terraform version print
 		sh "terraform --version -no-color"
 	}
@@ -11,13 +21,6 @@ node {
 		
 			//Checkout current project .. other can be checked out using git
 			checkout scm
-					
-			//set AWS Credentials - credentials need to be in Jenkins credentials using a naming schema
-			withCredentials([usernamePassword(credentialsId: 'demo-tenant', usernameVariable : 'USERNAME', passwordVariable : 'PASSWORD')]) {
-				env.AWS_SECRET_KEY_ID = "$USERNAME"
-				env.AWS_SECRET_ACCESS_KEY = "$PASSWORD"
-				sh 'echo uname=$USERNAME pwd=$PASSWORD'
-			}
 		
 			//setup local environment with terraform init and set remote config
 			// terraform init is safe to run multiple times
