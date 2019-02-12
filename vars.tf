@@ -1,3 +1,4 @@
 variable "snstopic" {
-  name = "myterraformtopic"
+  type = "string"
+  default = "myterraformtopic"
 }
