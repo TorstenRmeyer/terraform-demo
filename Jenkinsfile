@@ -3,7 +3,7 @@ node {
 	stage("startup") {
 		//Remove later.... sho that Jenkinsfile works
 		echo "start build"
-		env.PATH = "/usr/local/bin/terraform:${env.PATH}"
+		env.PATH = "/usr/local/bin/:${env.PATH}"
 		//Terraform version print
 		sh "terraform --version"
 	}
