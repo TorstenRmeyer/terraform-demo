@@ -39,6 +39,7 @@ node {
 	stage("plan") {
 		//Run terraform plan to see what will change
 		// OPTIONAL set vars using --var-file=[JOB_NAME].tfvars
+		// e.g have the vars in the tenant project and apply them to the code to run the setup for this tenant
 		sh "terraform plan -no-color -out=plan.out"
 	}
 	stage("apply") {
