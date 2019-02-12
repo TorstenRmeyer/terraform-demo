@@ -22,6 +22,7 @@ node {
 			//setup local environment with terraform init and set remote config
 			// terraform init is safe to run multiple times
 			// Open: Use a different key-pair to get state
+			sh 'echo $AWS_SECRET_KEY_ID'
 			sh "terraform init -no-color -backend=true -backend-config \"bucket=terraform-state-demotenant\" -backend-config \"key=${env.JOB_NAME}\" -backend-config \"region=eu-central-1\""
 
 	}
